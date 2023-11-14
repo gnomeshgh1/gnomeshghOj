@@ -1,8 +1,11 @@
 <template>
-  <div id="basicLayout">
+  <div id="userLayout">
     <a-layout style="min-height: 100vh">
       <a-layout-header class="header">
-        <GlobalHeader />
+        <a-space>
+          <img class="logo" src="../assets/logo.png" />
+          <div class="title">gnomeshgh OJ</div>
+        </a-space>
       </a-layout-header>
       <a-layout-content class="content">
         <router-view />
@@ -14,23 +17,24 @@
       >
     </a-layout>
   </div>
-
-  <router-view />
 </template>
 
 <style scoped>
-#basicLayout {
+#userLayout {
+  text-align: center;
 }
 
-#basicLayout .header {
-}
-
-#basicLayout .content {
-  background: linear-gradient(to right, #bbb, #fff);
+#userLayout .header {
   margin-bottom: 16px;
+  box-shadow: #eee 1px 1px 5px;
 }
 
-#basicLayout .footer {
+#userLayout .content {
+  margin-bottom: 16px;
+  padding: 20px;
+}
+
+#userLayout .footer {
   background: #42b983;
   padding: 16px;
   position: sticky;
@@ -40,10 +44,4 @@
   text-align: center;
 }
 </style>
-<script>
-import GlobalHeader from "@/components/GlobalHeader";
-
-export default {
-  components: { GlobalHeader },
-};
-</script>
+<script></script>

@@ -5,7 +5,6 @@
  * @return boolean 有无权限
  */
 import ACCESS_ENUM from "@/access/accessEnum";
-import AccessEnum from "@/access/accessEnum";
 
 const checkAccess = (loginUser: any, needAccess = ACCESS_ENUM.NOT_LOGIN) => {
   //获取当前登录用户具有的权限(如果没有loginUser，则表示未登录)
@@ -15,7 +14,7 @@ const checkAccess = (loginUser: any, needAccess = ACCESS_ENUM.NOT_LOGIN) => {
   }
   if (needAccess === ACCESS_ENUM.USER) {
     //如果用户未登录，那么表示无权限
-    if (loginUserAccess === AccessEnum.NOT_LOGIN) {
+    if (loginUserAccess === ACCESS_ENUM.NOT_LOGIN) {
       return false;
     }
   }
