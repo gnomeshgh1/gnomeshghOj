@@ -1,24 +1,24 @@
-package com.yupi.gnomeshghoj.model.dto.question;
+package com.yupi.gnomeshghoj.model.dto.questionSubmit;
 
 import lombok.Data;
 
 /**
- * 题目配置
+ *判题信息
  */
 @Data
-public class judgeConfig {
+public class judgeInfo {
     /**
-     *时间限制  ms
+     *程序执行信息
      */
-    private Long timeLimit;
+    private String message;
 
     /**
-     *内存限制 kb
+     *消耗内存
      */
-    private Long memoryLimit;
+    private Long memory;
 
     /**
-     *堆栈限制 kb
+     *消耗时间
      */
-    private Long stackLimit;
+    private Long time;
 }

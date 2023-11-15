@@ -1,10 +1,14 @@
-package com.yupi.gnomeshghoj.model.dto.post;
+package com.yupi.gnomeshghoj.model.dto.question;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.yupi.gnomeshghoj.common.PageRequest;
-import java.io.Serializable;
-import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 查询请求
@@ -14,22 +18,13 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class PostQueryRequest extends PageRequest implements Serializable {
+public class QuestionQueryRequest extends PageRequest implements Serializable {
 
     /**
      * id
      */
+    @TableId(type = IdType.AUTO)
     private Long id;
-
-    /**
-     * id
-     */
-    private Long notId;
-
-    /**
-     * 搜索词
-     */
-    private String searchText;
 
     /**
      * 标题
@@ -42,24 +37,14 @@ public class PostQueryRequest extends PageRequest implements Serializable {
     private String content;
 
     /**
-     * 标签列表
+     * 题目答案
      */
-    private List<String> tags;
+    private String answer;
 
     /**
-     * 至少有一个标签
-     */
-    private List<String> orTags;
-
-    /**
-     * 创建用户 id
+     * 创建用户id
      */
     private Long userId;
-
-    /**
-     * 收藏用户 id
-     */
-    private Long favourUserId;
 
     private static final long serialVersionUID = 1L;
 }
