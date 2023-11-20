@@ -9,6 +9,8 @@ import com.yupi.gnomeshghoj.model.entity.Question;
 import com.yupi.gnomeshghoj.model.entity.QuestionSubmit;
 import com.yupi.gnomeshghoj.mapper.QuestionSubmitMapper;
 import com.yupi.gnomeshghoj.model.entity.User;
+import com.yupi.gnomeshghoj.model.enums.QuestionSubmitLanguageEnum;
+import com.yupi.gnomeshghoj.model.enums.QuestionSubmitStatusEnum;
 import com.yupi.gnomeshghoj.service.QuestionService;
 import com.yupi.gnomeshghoj.service.QuestionSubmitService;
 import org.springframework.aop.framework.AopContext;
@@ -37,6 +39,11 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
      */
     @Override
     public long doQuestionSubmit(QuestionSubmitAddRequest questionSubmitAddRequest, User loginUser) {
+        String language = questionSubmitAddRequest.getLanguage();
+        QuestionSubmitLanguageEnum languageEnum = QuestionSubmitLanguageEnum.getEnumByValue(language);
+        if(languageEnum==null){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR,"编程语言错误！");
+        }
         long questionId = questionSubmitAddRequest.getQuestionId();
         // 判断实体是否存在，根据类别获取实体
         Question question = questionService.getById(questionId);
@@ -50,7 +57,8 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
         questionSubmit.setQuestionId(questionId);
         questionSubmit.setCode(questionSubmitAddRequest.getCode());
         questionSubmit.setLanguage(questionSubmitAddRequest.getLanguage());
-        questionSubmit.setStatus(0);
+        //设置初始状态
+        questionSubmit.setStatus(QuestionSubmitStatusEnum.WAITING.getValue());
         questionSubmit.setJudgeInfo("{}");
         boolean save = this.save(questionSubmit);
         if(!save){
